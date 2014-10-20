@@ -1,5 +1,9 @@
+# Modified from:
+#   https://github.com/jagregory/docker-tilestache
+#   by James Gregory <james@jagregory.com>
+ 
 FROM ubuntu:14.04
-MAINTAINER James Gregory <james@jagregory.com>
+MAINTAINER TNRIS App Team <contact@tnris.org>
 
 # install Python and all the mapnik dependencies
 RUN apt-get update -y && apt-get install -y libjpeg-dev zlib1g-dev python python-setuptools python-dev python-pip python-gdal libboost-python-dev software-properties-common libmapnik2.2 libmapnik-dev mapnik-utils python-mapnik
@@ -11,4 +15,14 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libboost_python.so /usr/lib
 RUN ln -s /usr/lib/x86_64-linux-gnu/libboost_thread.so /usr/lib
 
 # install tilestache, mapnik, and dependencies
-RUN pip install --allow-external PIL --allow-unverified PIL PIL tilestache simplejson werkzeug sympy Blit mapnik2
+RUN pip install --allow-external PIL --allow-unverified PIL PIL tilestache simplejson werkzeug sympy Blit mapnik2 uwsgi
+
+VOLUME ["/var/tilestache"]
+
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+
+WORKDIR /var/tilestache
+
+EXPOSE 8080
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
