@@ -10,7 +10,7 @@ This image also includes an endpoint script to start a running tilestache
 server (using uWSGI as the wsgi server).
 
 Example usage:
-    docker run -it -p 8080:8080 --volume=path/to/tilestache.cfg:/var/tilestache/tilestache.cfg:ro -rm tnris/tilestache
+    docker run -p 8080:8080 --volume=path/to/tilestache.cfg:/var/tilestache/tilestache.cfg:ro -rm tnris/tilestache
 
 This will start a tilestache server, running on port 8080 using the config file
 at path/to/tilestache.cfg
