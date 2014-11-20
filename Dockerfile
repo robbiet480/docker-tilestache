@@ -34,6 +34,7 @@ RUN pip install \
     jinja2 \
     mapnik2 \
     --allow-external PIL --allow-unverified PIL PIL \
+    boto \
     redis \
     simplejson \
     sympy \
