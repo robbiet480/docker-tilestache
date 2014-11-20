@@ -1,11 +1,14 @@
 # Modified from:
+#   https://github.com/TNRIS/docker-tilestache
+#   by TNRIS App Team <contact@tnris.org>
+#   which was modified from
 #   https://github.com/jagregory/docker-tilestache
 #   by James Gregory <james@jagregory.com>
  
 FROM ubuntu:14.04
-MAINTAINER TNRIS App Team <contact@tnris.org>
+MAINTAINER Robert Trencheny <me@robbiet.us>
 
-# install Python and all the mapnik dependencies
+# install Python and all the dependencies
 RUN apt-get update -y \
     && apt-get install -y \
         libjpeg-dev \
@@ -16,11 +19,7 @@ RUN apt-get update -y \
         python-pip \
         python-gdal \
         libboost-python-dev \
-        software-properties-common \
-        libmapnik2.2 \
-        libmapnik-dev \
-        mapnik-utils \
-        python-mapnik
+        software-properties-common
 
 # symlink the native extensions so Python can pick them up
 RUN ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
@@ -28,11 +27,10 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
 RUN ln -s /usr/lib/x86_64-linux-gnu/libboost_python.so /usr/lib
 RUN ln -s /usr/lib/x86_64-linux-gnu/libboost_thread.so /usr/lib
 
-# install tilestache, mapnik, and dependencies
+# install tilestache and dependencies
 RUN pip install \
     Blit \
     jinja2 \
-    mapnik2 \
     --allow-external PIL --allow-unverified PIL PIL \
     boto \
     redis \

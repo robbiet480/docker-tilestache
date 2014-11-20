@@ -8,6 +8,7 @@ import os
 
 import jinja2
 import TileStache
+import TileStache.Goodies.StatusServer
 
 application = None
 
@@ -26,5 +27,7 @@ except Exception as e:
 with open(outfile, 'wb') as f:
     f.write(rendered)
 
-
-application = TileStache.WSGITileServer(outfile)
+if os.getenv('REDIS_PORT_6379_TCP_ADDR'):
+  application = TileStache.Goodies.StatusServer.WSGIServer(outfile, redis_host=os.getenv('REDIS_PORT_6379_TCP_ADDR'), redis_port=os.getenv('REDIS_PORT_6379_TCP_PORT'))
+else:
+  application = TileStache.WSGITileServer(outfile)
