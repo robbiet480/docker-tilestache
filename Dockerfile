@@ -34,6 +34,7 @@ RUN pip install \
     --allow-external PIL --allow-unverified PIL PIL \
     boto \
     redis \
+    python-memcached \
     simplejson \
     sympy \
     tilestache \
